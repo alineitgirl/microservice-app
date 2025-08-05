@@ -12,7 +12,7 @@ public static class PrepDb
 
     private static void SeedData(AppDbContext context)
     {
-        if (@context.Platforms.Any())
+        if (!context.Platforms.Any())
         {
             Console.WriteLine("----->> Seeding Data");
             context.Platforms.AddRange(
@@ -20,6 +20,7 @@ public static class PrepDb
                 new Platform() {Name = "PostgresSQL", Publisher = "Aka Russian Federation", Cost = "Free"},
                 new Platform() {Name = "Kubernetes", Publisher = "Cloud Native Computing Foundation", Cost = "Free"}
             );
+            context.SaveChanges();
         }
         else
         {
